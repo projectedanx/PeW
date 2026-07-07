@@ -5,7 +5,7 @@
 generator client {
     provider = "prisma-client-js"
     binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
-    output = "/home/ubuntu/prompt_engineering_workbench/app/node_modules/.prisma/client"
+    output = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -235,4 +235,91 @@ model ResearchAnalytics {
   updatedAt        DateTime @updatedAt
   
   @@map("research_analytics")
+}
+
+// Governance Core Models
+
+model DecoratorNode {
+  id                    String   @id @default(cuid())
+  className             String   // e.g. Privilege, Security Boundary, etc.
+  ring                  Int      // e.g. 0, 1, 2, 3
+  syntax                String
+  mechanism             String
+  nullBaselineTrigger   String
+  metabolicROI          String
+  orthogonalityConfidence String // "DIRECT", "INFERRED", "SPECULATIVE"
+  evidenceRefs          String[]
+  activationTier        String
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@map("decorator_nodes")
+}
+
+model CompatibilityEdge {
+  id          String   @id @default(cuid())
+  fromId      String
+  toId        String
+  edgeType    String   // "HARD_MUTEX", "SOFT_MUTEX", "CONDITIONAL_MUTEX", "REQUIRES", "SEQUENCING_CONFLICT"
+  condition   String?
+  rationale   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("compatibility_edges")
+}
+
+model StackProfile {
+  id                 String   @id @default(cuid())
+  name               String
+  persona            String
+  decoratorSet       String[]
+  evaluationCriteria Json
+  failureTriggers    Json
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("stack_profiles")
+}
+
+model AblationResult {
+  id               String   @id @default(cuid())
+  stackId          String
+  ablatedClass     String
+  failureMode      String
+  severity         String
+  recoveryNotes    String?
+  promotionStatus  String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("ablation_results")
+}
+
+model FrameworkArtifact {
+  id                String   @id @default(cuid())
+  name              String
+  type              String
+  complexityTier    String
+  sourceDocIds      String[]
+  integrationPoints String[]
+  uncertaintyNotes  String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("framework_artifacts")
+}
+
+model AnalysisRun {
+  id                  String   @id @default(cuid())
+  corpusId            String
+  baselineVersion     String
+  extractedArtifacts  Json
+  generatedCatalog    Json
+  runDate             DateTime @default(now())
+  reviewStatus        String
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@map("analysis_runs")
 }
