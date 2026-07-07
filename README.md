@@ -260,7 +260,6 @@ Contributions that are modular, traceable, systematic, and honest about uncertai
 | Research corpus | ✅ Established — 3 core documents, 50+ source studies |
 | Framework baseline | ✅ Defined — PALS, CxEP, Systemic, Role, LensGPT |
 | Governance Core | ✅ Defined — PDL, SCOS, Dichotomic Scaffolds |
-| Governance Core | ✅ Defined — PDL, SCOS, Dichotomic Scaffolds |
 | Contribution rules | ✅ Formalized |
 | Application — routing | ✅ 14 module routes implemented |
 | Application — data layer | ✅ Prisma schema (including Governance Core) + NextAuth in place |
